@@ -2,13 +2,11 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-var saveButton = document.querySelectorAll('button');
-var textareaEl = document.querySelectorAll('textarea');
-var divEl = document.querySelectorAll('.time-block');
 
 $(function () {
 
-
+  var saveButton = document.querySelectorAll('button');
+  var divEl = document.querySelectorAll('.time-block');
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -35,8 +33,9 @@ $(function () {
   // current hour in 24-hour time?
   for (var i = 0; i < divEl.length; i++) {
     var divBox = divEl[i];
-    var now = dayjs().format('H');
-    var blockTime = divEl.id;
+    var now = 'hour-' + dayjs().format('H');
+    var blockTime = divBox.id;
+    console.log(blockTime);
 
     if (now < blockTime) {
       divBox.classList.remove('past', 'present');
@@ -48,6 +47,7 @@ $(function () {
           divBox.classList.remove('future', 'past');
           divBox.classList.add('present');
       }
+      
     };
 
 
@@ -57,13 +57,19 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
 
-  // for (var i = 0; i < textareaEl.length; i++) {
-  //   var textBox = textareaEl[i];
-  //   var textId = textBox.id[i];
-  //   var value = localStorage.getItem(textId);
-  //   textBox.textContent = value;
-  //   console.log(textareaEl);
-  // };
+
+
+   for (var i = 0; i < divEl.length; i++) {
+    var divBox = divEl[i];
+    var divBoxId = divBox.id;
+    var textarea = document.querySelector('textarea');
+    var textareaId= textarea.id;
+    var value = localStorage.getItem(divBoxId);
+
+    if (textareaId === divBoxId) {
+      textarea.innerHTML.valueOf = value;
+    }
+      };
 
 
 
