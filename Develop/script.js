@@ -33,21 +33,25 @@ $(function () {
   // current hour in 24-hour time?
   for (var i = 0; i < divEl.length; i++) {
     var divBox = divEl[i];
-    var now = 'hour-' + dayjs().format('H');
+    var now = dayjs().format('H');
     var blockTime = divBox.id;
-    console.log(blockTime);
+    var blockTimeNum = blockTime.split('-');
+    var blockTimeLast = blockTimeNum[1];
+   
 
-    if (now < blockTime) {
+    if (now < blockTimeLast) {
       divBox.classList.remove('past', 'present');
       divBox.classList.add('future');
-    }   else if (now > blockTime) {
+    }   else if (now > blockTimeLast) {
           divBox.classList.remove('future', 'present');
           divBox.classList.add('past');
-    }   else {
+    }   else if (now === blockTimeLast) {
           divBox.classList.remove('future', 'past');
           divBox.classList.add('present');
       }
+      console.log(now);
       
+      console.log(blockTimeLast)
     };
 
 
