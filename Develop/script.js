@@ -19,9 +19,11 @@ $(function () {
   
   function saveInput() {
     var parentEl = this.parentElement.id;
+    var parentElSplit = parentEl.split('-');
+    var parentElNum = parentElSplit[1];
     var eventEl = this.previousElementSibling.value
-    localStorage.setItem(parentEl, eventEl);
-    console.log(parentEl);
+    localStorage.setItem(parentElNum, eventEl);
+    console.log(parentElNum);
   };
 
 
@@ -49,9 +51,6 @@ $(function () {
           divBox.classList.remove('future', 'past');
           divBox.classList.add('present');
       }
-      console.log(now);
-      
-      console.log(blockTimeLast)
     };
 
 
@@ -61,19 +60,20 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
 
-
+    var textareaEl = document.querySelector('textarea');
 
    for (var i = 0; i < divEl.length; i++) {
     var divBox = divEl[i];
     var divBoxId = divBox.id;
-    var textarea = document.querySelector('textarea');
-    var textareaId= textarea.id;
-    var value = localStorage.getItem(divBoxId);
+    var divBoxNum = divBoxId.split('-');
+    var divBoxNumLast = divBoxNum[1]; //Gives the NUMBER of the div box, also is the key
+    var textArea = divBox.children[1];
+    console.log(textArea);
 
-    if (textareaId === divBoxId) {
-      textarea.innerHTML.valueOf = value;
-    }
-      };
+    var value = localStorage.getItem(divBoxNumLast); //Grabs the value of the key number
+    console.log(value);
+    textArea.innerHTML = value;
+    };
 
 
 
